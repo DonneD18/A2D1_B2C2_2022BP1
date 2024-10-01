@@ -2,6 +2,8 @@
 using Microsoft.Extensions.DependencyInjection;
 using ToDoList;
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddDbContext<IDataAccesssLayer>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("IDataAccesssLayer") ?? throw new InvalidOperationException("Connection string 'IDataAccesssLayer' not found.")));
 builder.Services.AddDbContext<JsonDal>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("JsonDal") ?? throw new InvalidOperationException("Connection string 'JsonDal' not found.")));
 
