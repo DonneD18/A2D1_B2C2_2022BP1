@@ -61,10 +61,10 @@ class Program
             try
             {
                 string description = "New task";
-                HttpResponseMessage response = await client.PostAsJsonAsync($"{baseUrl}/ToDoList", new ToDoTask(description));
+                HttpResponseMessage response = await client.PostAsJsonAsync($"{baseUrl}/ToDoList", new ToDoTask { Description = description });
                 if (response.IsSuccessStatusCode)
                 {
-                    Console.WriteLine($"Task created successfully. New task ID: {await response.Content.ReadAsAsync<int>()}");
+                    Console.WriteLine($"Task created successfully. New task ID: {await response.Content.ReadFromJsonAsync<int>()}");
                 }
                 else
                 {
